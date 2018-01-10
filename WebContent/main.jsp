@@ -9,6 +9,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Miner clicker</title>
 		<link rel="stylesheet" href="assets/bootstrap/bootstrap.css">
+		<script type="text/javascript" src="js/util/jquery.js"></script>
+		<script type="text/javascript" src="js/util/bootbox.min.js"></script>
+		<script type="text/javascript" src="js/util/bootstrap/bootstrap.js"></script>
 	</head>
 	<body>
 		<jsp:include page="component/nav.jsp"></jsp:include>

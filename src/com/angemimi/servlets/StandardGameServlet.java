@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class HomeServlet
+ * Servlet implementation class StandardGameServlet
  */
-@WebServlet({"/home"})
-public class HomeServlet extends HttpServlet {
+@WebServlet({"/standardGame", "/standardPlay"})
+public class StandardGameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlet() {
+    public StandardGameServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,9 @@ public class HomeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.setAttribute("pageName", "home");
+		String name = request.getParameter("name");
+		request.setAttribute("pageName", "standardPlay");
+		request.setAttribute("Name", name);
 		request.getRequestDispatcher("main.jsp").forward(request, response);
 	}
 
