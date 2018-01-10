@@ -1,0 +1,7 @@
+/*
+include 'shared'
+include 'api'
+include 'service:webservice'
+*/
+
+rootProject.name = 'ClickerGame'
