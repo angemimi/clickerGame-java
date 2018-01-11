@@ -1,11 +1,11 @@
 package com.angemimi.classes;
 
-public class MinersBonus extends Bonus {
+public class MinersBonus {
 	private int number = 0;
-	private int price = 50;
+	private int price = 10;
 	private int nbPierre = 1;
 	
-	public MinersBonus(){ super();}
+	public MinersBonus(){}
 
 	public int getNumber() {
 		return number;

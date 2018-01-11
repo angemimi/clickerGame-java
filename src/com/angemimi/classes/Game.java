@@ -12,7 +12,7 @@ public class Game {
 	private int nbPiece;
 	private int nbDiamond;
 	private ArrayList<Price> prices = new ArrayList<Price>();
-	private Bonus bonus;
+	private MinersBonus miner = new MinersBonus();
 	
 	public Game(){
 		this.id = UUID.randomUUID();
@@ -54,12 +54,6 @@ public class Game {
 	public void setPrices(ArrayList<Price> prices) {
 		this.prices = prices;
 	}
-	public Bonus getBonus() {
-		return bonus;
-	}
-	public void setBonus(Bonus bonus) {
-		this.bonus = bonus;
-	}
 	
 	// Enregistrement de la partie dans la variable data
 	public void create(){
@@ -75,11 +69,18 @@ public class Game {
 		Data.allGames.get(g.getId()).setNbDiamond(g.getNbDiamond());
 		Data.allGames.get(g.getId()).setNbPiece(g.getNbPiece());
 		Data.allGames.get(g.getId()).setScore(g.getScore());
-		Data.allGames.get(g.getId()).setBonus(g.getBonus());
 		Data.allGames.get(g.getId()).setPrices(g.getPrices());
 	}
 	
 	public void deleteToData(Game g){
 		Data.allGames.remove(g.getId());
+	}
+
+	public MinersBonus getMiner() {
+		return miner;
+	}
+
+	public void setMiner(MinersBonus miner) {
+		this.miner = miner;
 	}
 }

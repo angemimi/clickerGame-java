@@ -16,26 +16,32 @@
 			<img src="img/rocher.png" class="roche" />
 		</div>
 		<div class="col col-md-6 col-sm-6 col-xs-12">
-			<div class="disabled">
-			</div>
+			
 		</div>
 		<div class="col col-md-3 col-sm-3 col-xs-12">
 			<div class="row">
-				<div class="col col-sm-4 col-md-4 hidden-xs card">
+				<div class="col col-sm-4 col-md-4 hidden-xs card pieces-div disabled">
+					<div class="filter"></div>
 					<img src="img/pieces.png" class="icon card-img-top" />
 					<div class="card-body">
 					    <span class="pieces"><%= player.getPlayGame().getNbPiece() %></span>
 					</div>					
 				</div>
-				<div class="col col-sm-4 col-md-4 hidden-xs card">
+				<div class="col col-sm-4 col-md-4 hidden-xs card diams-div disabled">
+					<div class="filter"></div>
 					<img src="img/diams.png" class="icon card-img-top" />
 					<div class="card-body">
 					    <span class="diams"><%= player.getPlayGame().getNbDiamond() %></span>
 					</div>					
 				</div>
 			</div>
-			<div>
-				Mineur
+			<div class="card disabled miners-div">
+				<div class="filter"></div>
+				<img src="img/miner.png" class="card-img-top add-miner">
+				<div class="card-body">
+					<p class="price-miner"><%= player.getPlayGame().getMiner().getPrice() %> pièces</p>
+					<p><span class="nb-miner"><%= player.getPlayGame().getMiner().getNumber() %></span> clic par seconde</p>
+				</div>
 			</div>
 		</div>
 	</div>
