@@ -8,21 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.angemimi.classes.Game;
 import com.angemimi.classes.Player;
 
 /**
- * Servlet implementation class HomeServlet
+ * Servlet implementation class SaveGameScoreServlet
  */
-@WebServlet({"/home"})
-public class HomeServlet extends HttpServlet {
+@WebServlet("/saveGame")
+public class SaveGameScoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomeServlet() {
+    public SaveGameScoreServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,20 +33,22 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String uuid = request.getParameter("playerId");
-		UUID playerId = null;
-		if(uuid != null){
-			playerId = UUID.fromString(request.getParameter("playerId"));
-
+		int score = Integer.parseInt(request.getParameter("score"));
+		int pieces = Integer.parseInt(request.getParameter("pieces"));
+		int diams = Integer.parseInt(request.getParameter("diams"));
+		UUID idPlayer = UUID.fromString(request.getParameter("idPlayer"));
+		Player player = new Player().retrieve(idPlayer);
+		player.getPlayGame().setScore(score);
+		player.getPlayGame().setNbPiece(pieces);
+		player.getPlayGame().setNbDiamond(diams);
+		System.out.println(player.getPlayGame().getId());
+		if(player.getHigthScore() < score){
+			player.setHigthScore(score);
 		}
-		if(playerId != null){
-			 request.setAttribute("playerId",playerId);
-				new Game().deleteToData(new Player().retrieve(playerId).getPlayGame());
-
-		}
-	
-		request.setAttribute("pageName", "home");
-		request.getRequestDispatcher("main.jsp").forward(request, response);
+		player.updateToData(player);
+//		player.getPlayGame().updateToData(player.getPlayGame());
+		HttpSession session = request.getSession();
+		session.setAttribute("player"+player.getId(), player);
 	}
 
 	/**

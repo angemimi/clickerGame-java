@@ -33,9 +33,6 @@ public class Player {
 	public UUID getId() {
 		return id;
 	}
-	public void setId(UUID id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
@@ -60,33 +57,40 @@ public class Player {
 	public void setPrices(ArrayList<Price> prices) {
 		this.prices = prices;
 	}
-	
-	public void create(Player player, String typeGame, double time){
-		Game game = null;
-		switch(typeGame){
-			case "standard":
-				game = new StandardGame();
-				game.create();
-			break;
-			case "limitTime":
-				if(time != 0){
-					game = new LimitTimeGame(time);
-					game.create();
-				} else {
-					game = new LimitTimeGame();
-					game.create();
-				}
-			break;
-		}
-		game.create();
-		player.games.add(game);
-		player.playGame = game;
-		Data.players.add(player);
-	}
 	public Game getPlayGame() {
 		return playGame;
 	}
 	public void setPlayGame(Game playGame) {
 		this.playGame = playGame;
+	}
+	
+	public void create(Player player, String typeGame, double time){
+		Game game = new Game();
+		if(typeGame == "standard"){
+			game = new StandardGame();
+		}
+		if(typeGame == "limitTime"){
+			if(time != 0){
+				game = new LimitTimeGame(time);
+			} else {
+				game = new LimitTimeGame();
+			}
+		}
+		game.create();
+		player.getGames().add(game);
+		player.setPlayGame(game);
+		Data.players.put(player.getId(),player);
+	}
+	
+	public Player retrieve(UUID id){
+		return Data.players.get(id);
+	}
+	
+	public void updateToData(Player p){
+		Data.players.get(p.getId()).setHigthScore(p.higthScore);
+		Data.players.get(p.getId()).setGames(p.getGames());
+		Data.players.get(p.getId()).setName(p.getName());
+		Data.players.get(p.getId()).setPlayGame(p.getPlayGame());
+		Data.players.get(p.getId()).setPrices(p.getPrices());
 	}
 }
