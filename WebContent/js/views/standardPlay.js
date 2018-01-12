@@ -1,24 +1,16 @@
-var scoreForPiece = 0;
-var scoreForDiams = 0;
-
 $(document).off('click', '.standardGame .roche').on('click', '.standardGame .roche', function(e){
 	var score = $(document).find('.standardGame .score');
 	var score_int = parseInt(score.text());
 	var piece = $(document).find('.standardGame .pieces');
 	score_int+=1;
-	scoreForPiece = (scoreForPiece < 100 ? scoreForPiece +1 : 0);
-	scoreForDiams = (scoreForDiams < 100 ? scoreForDiams +1 : 0);
-
 	// Proposition d'acheter une pièce
-	if(scoreForPiece == 15){
+	if(score_int >= 15){
 		$(document).find('.standardGame .pieces-div').removeClass('disabled');
-		scoreForPiece = 0;
 	}
 		
 	// Proposition d'acheter un diamand
-	if(scoreForDiams == 50){
+	if(score_int >= 50){
 		$(document).find('.standardGame .diams-div').removeClass('disabled');
-		scoreForDiams = 0;
 	}
 	
 	// Envoie de la modification au serveur
@@ -41,7 +33,7 @@ $(document).off('click','.standardGame .pieces-div').on('click','.standardGame .
 
 	var score_int = parseInt(score.text());
 	if(!$(document).find('.standardGame .pieces-div').hasClass('disabled')){
-		if(score_int > 15) {
+		if(score_int >= 15) {
 			piece.text(parseInt(piece.text()) + 1);
 			score_int = score_int-15;
 			score.text(score_int);
@@ -54,7 +46,7 @@ $(document).off('click','.standardGame .pieces-div').on('click','.standardGame .
 		$(document).find('.standardGame .diams-div').addClass('disabled');
 	}
 	
-	if(parseInt(piece.text()) >= 10){
+	if(parseInt(piece.text()) >= parseInt($(document).find('.standardGame .miners-div .price-miner').text())){
 		$(document).find('.standardGame .miners-div').removeClass('disabled');
 	}
 });
@@ -65,7 +57,7 @@ $(document).off('click','.standardGame .diams-div').on('click','.standardGame .d
 	var score = $(document).find('.standardGame .score');
 	var score_int = parseInt(score.text());
 	if(!$(document).find('.standardGame .diams-div').hasClass('disabled')){
-		if(score_int > 50) {
+		if(score_int >= 50) {
 			diams.text(parseInt(diams.text()) + 1);
 			score_int = score_int-50;
 			score.text(score_int);
@@ -88,13 +80,14 @@ $(document).off('click','.standardGame .miners-div .add-miner').on('click','.sta
 	var nb_miner = parseInt(nb.text());
 	
 	if(!$(document).find('.standardGame .miners-div').hasClass('disabled')){
-		if(piece_int > price_miner){
+		if(piece_int >= price_miner){
 			nb_miner += 1;
 			nb.text(nb_miner);
 			piece_int = piece_int - price_miner;
 			piece.text(piece_int);
 			
-			price_miner += 15;
+			price_miner += 5;
+			price.text(price_miner)
 			
 			if(piece_int < price_miner){
 				$(document).find('.standardGame .miners-div').addClass('disabled');
@@ -111,7 +104,7 @@ $(document).ready(function(){
 		var score_int = parseInt(score.text());
 		if(nb_miner > 0){
 			score_int += nb_miner;
-			score.text(score_int);
+			score.text(score_int-1);
 			$(document).find('.standardGame .roche').trigger('click');
 		}
 	},1000);

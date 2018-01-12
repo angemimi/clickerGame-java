@@ -41,7 +41,6 @@ public class SaveGameScoreServlet extends HttpServlet {
 		player.getPlayGame().setScore(score);
 		player.getPlayGame().setNbPiece(pieces);
 		player.getPlayGame().setNbDiamond(diams);
-		System.out.println(player.getPlayGame().getId());
 		if(player.getHigthScore() < score){
 			player.setHigthScore(score);
 		}
