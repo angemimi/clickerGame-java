@@ -69,6 +69,10 @@ $(document).off('click','.standardGame .diams-div').on('click','.standardGame .d
 	if(!$(document).find('.standardGame .pieces-div').hasClass('disabled') && score_int < 15){
 		$(document).find('.standardGame .pieces-div').addClass('disabled');
 	}
+	
+	if(parseInt(diams.text()) >= parseInt($(document).find('.standardGame .chariot-div .price-chariot').text())){
+		$(document).find('.standardGame .chariot-div').removeClass('disabled');
+	}
 });
 
 $(document).off('click','.standardGame .miners-div .add-miner').on('click','.standardGame .miners-div .add-miner', function(){
@@ -78,6 +82,8 @@ $(document).off('click','.standardGame .miners-div .add-miner').on('click','.sta
 	var price_miner = parseInt(price.text());
 	var nb = $(document).find('.standardGame .miners-div .nb-miner');
 	var nb_miner = parseInt(nb.text());
+	var trigger_click = $(document).find('.standardGame .trigger-click');
+	var trigger_click_int = parseInt(trigger_click.text());
 	
 	if(!$(document).find('.standardGame .miners-div').hasClass('disabled')){
 		if(piece_int >= price_miner){
@@ -87,10 +93,41 @@ $(document).off('click','.standardGame .miners-div .add-miner').on('click','.sta
 			piece.text(piece_int);
 			
 			price_miner += 5;
-			price.text(price_miner)
+			price.text(price_miner);
+			trigger_click_int += 1;
+			trigger_click.text(trigger_click_int);
 			
 			if(piece_int < price_miner){
 				$(document).find('.standardGame .miners-div').addClass('disabled');
+			}
+		}
+	}
+});
+
+$(document).off('click','.standardGame .chariot-div .add-chariot').on('click','.standardGame .chariot-div .add-chariot', function(){
+	var diams = $(document).find('.standardGame .diams');
+	var diams_int = parseInt(diams.text());
+	var price = $(document).find('.standardGame .chariot-div .price-chariot');
+	var price_chariot = parseInt(price.text());
+	var nb = $(document).find('.standardGame .chariot-div .nb-chariot');
+	var nb_miner = parseInt(nb.text());
+	var trigger_click = $(document).find('.standardGame .trigger-click');
+	var trigger_click_int = parseInt(trigger_click.text());
+	
+	if(!$(document).find('.standardGame .chariot-div').hasClass('disabled')){
+		if(diams_int >= price_chariot){
+			nb_miner += 1;
+			nb.text(nb_miner);
+			diams_int = diams_int - price_chariot;
+			diams.text(diams_int);
+			
+			price_chariot += 5;
+			price.text(price_chariot);
+			trigger_click_int += 5;
+			trigger_click.text(trigger_click_int);
+			
+			if(diams_int < price_chariot){
+				$(document).find('.standardGame .chariot-div').addClass('disabled');
 			}
 		}
 	}
@@ -100,10 +137,20 @@ $(document).ready(function(){
 	setInterval(function(){
 		var miner = $(document).find('.standardGame .miners-div .nb-miner');
 		var nb_miner = parseInt(miner.text());
+		var chariot = $(document).find('.standardGame .chariot-div .nb-chariot');
+		var nb_chariot = parseInt(chariot.text());
 		var score = $(document).find('.standardGame .score');
 		var score_int = parseInt(score.text());
+		
+		// ajout d'un click par seconde pour les mineur
 		if(nb_miner > 0){
 			score_int += nb_miner;
+			score.text(score_int-1);
+			$(document).find('.standardGame .roche').trigger('click');
+		}
+		
+		if(nb_chariot > 0){
+			score_int += (nb_chariot*5);
 			score.text(score_int-1);
 			$(document).find('.standardGame .roche').trigger('click');
 		}

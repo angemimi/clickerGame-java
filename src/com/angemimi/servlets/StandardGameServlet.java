@@ -58,7 +58,6 @@ public class StandardGameServlet extends HttpServlet {
 			Game game = new StandardGame();
 			player.setPlayGame(game);
 //			System.out.println(game.getId());
-			System.out.println(player.getHigthScore()+" fed");
 			player.getGames().add(game);
 			request.setAttribute("playerId", playerId);
 		}

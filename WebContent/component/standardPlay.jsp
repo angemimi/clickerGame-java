@@ -13,7 +13,10 @@
 		<div class="col col-md-3 col-sm-3 col-xs-12">
 			<input type="hidden" value="<%= player.getId() %>" name="idPlayer">
 			<p class="score"><%= player.getPlayGame().getScore() %></p>
-			<img src="img/rocher.png" class="roche"/>
+			<p> <span class="trigger-click">0</span> par seconde</p>
+			<div>
+				<img src="img/rocher.png" class="roche"/>
+			</div>
 		</div>
 		<div class="col col-md-6 col-sm-6 col-xs-12">
 			<div class="row">
