@@ -37,8 +37,8 @@
 						<img src="img/chariot.png" class="card-img-top add-chariot">
 					</div>
 					<div class="card-body">
-						<p><span class="price-chariot"><%= player.getPlayGame().getMiner().getPrice() %></span> <img src="img/diams.png" class="icon"></p>
-						<p><span class="nb-chariot"><%= player.getPlayGame().getMiner().getNumber() %></span> chariot(s)</p>
+						<p><span class="price-chariot"><%= player.getPlayGame().getChariot().getPrice() %></span> <img src="img/diams.png" class="icon"></p>
+						<p><span class="nb-chariot"><%= player.getPlayGame().getChariot().getNumber() %></span> chariot(s)</p>
 					</div>
 				</div>
 			</div>

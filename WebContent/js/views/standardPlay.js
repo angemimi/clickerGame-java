@@ -2,6 +2,7 @@ $(document).off('click', '.standardGame .roche').on('click', '.standardGame .roc
 	var score = $(document).find('.standardGame .score');
 	var score_int = parseInt(score.text());
 	var piece = $(document).find('.standardGame .pieces');
+	var diams = $(document).find('.standardGame .diams');
 	score_int+=1;
 	// Proposition d'acheter une pièce
 	if(score_int >= 15){
@@ -14,7 +15,7 @@ $(document).off('click', '.standardGame .roche').on('click', '.standardGame .roc
 	}
 	
 	// Envoie de la modification au serveur
-	$.ajax("saveGame?score="+score_int+"&diams=0&pieces="+piece.text()+"&idPlayer="+$(document).find('.standardGame [name="idPlayer"]').val())
+	$.ajax("saveGame?score="+score_int+"&diams="+diams.text()+"&pieces="+piece.text()+"&idPlayer="+$(document).find('.standardGame [name="idPlayer"]').val())
 	.done(function() {
 		score.text(score_int);
 	  })

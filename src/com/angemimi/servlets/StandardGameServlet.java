@@ -57,7 +57,6 @@ public class StandardGameServlet extends HttpServlet {
 			new Game().deleteToData(player.getPlayGame()); // Suppression de la précédente partie
 			Game game = new StandardGame();
 			player.setPlayGame(game);
-//			System.out.println(game.getId());
 			player.getGames().add(game);
 			request.setAttribute("playerId", playerId);
 		}
